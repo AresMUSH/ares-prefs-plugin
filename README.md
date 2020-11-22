@@ -39,7 +39,7 @@ This plugin has no web portal component.
 
 ## Installation
 
-In the game, run `plugin/install prefs`.
+In the game, run `plugin/install <github url>`.
 
 See additional setup instructions below.
 
