@@ -3,42 +3,30 @@ module AresMUSH
     class SetPrefsCmd
       include CommandHandler
                 
-      attr_accessor :category, :setting, :note
+      attr_accessor :prefs, :name
             
       def parse_args
-        args = cmd.parse_args(ArgParser.arg1_equals_arg2_slash_optional_arg3)
+        args = cmd.parse_args(ArgParser.arg1_equals_optional_arg2)
           
-        self.category = titlecase_arg(args.arg1)
-        self.setting = trim_arg(args.arg2)
-        self.note = args.arg3
-      end
-      
-      def required_args
-        [ self.category ]
-      end
-      
-      def check_setting
-        return nil if !self.setting
-        return t('prefs.invalid_setting') if !Prefs.is_valid_setting?(self.setting)
-        return nil
-      end
-      
-      def check_category
-        cats = Prefs.categories
-        return t('prefs.invalid_category', :cats => cats.join(' ')) if !cats.include?(self.category)
-        return nil
-      end
-      
-      def handle
-        prefs = enactor.prefs || {}
-        if (self.setting)
-          prefs[self.category] = { setting: self.setting, note: self.note }
-          enactor.update(prefs: prefs)
-          client.emit_success t('prefs.pref_set')
+        if (args.arg2)
+          self.name = titlecase_arg(args.arg1)
+          self.prefs = trim_arg(args.arg2)
         else
-          prefs.delete self.category
-          enactor.update(prefs: prefs)
-          client.emit_success t('prefs.pref_removed')
+          self.name = enactor_name
+          self.prefs = trim_arg(args.arg1)
+        end
+      end
+
+      def handle
+        ClassTargetFinder.with_a_character(self.name, client, enactor) do |model|
+          
+          if (!Prefs.can_edit_prefs?(enactor, model))
+            client.emit_failure t('dispatcher.not_allowed')
+            return
+          end
+          
+          model.update(rp_prefs: self.prefs)
+          client.emit_success t('prefs.pref_set')
         end
       end
     end

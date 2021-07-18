@@ -2,24 +2,12 @@ module AresMUSH
   module Prefs
     class PrefsFilterTemplate < ErbTemplateRenderer
             
-      attr_accessor :prefs, :category
+      attr_accessor :search, :chars
       
-      def initialize(prefs, category)
-        @prefs = prefs
-        @category = category
+      def initialize(search, chars)
+        @search = search
+        @chars = chars
         super File.dirname(__FILE__) + "/prefs_filter.erb"
-      end
-      
-      def positive
-        @prefs['+']
-      end
-      
-      def negative
-        @prefs['-']
-      end
-      
-      def maybe
-        @prefs['~']
       end
     end
   end

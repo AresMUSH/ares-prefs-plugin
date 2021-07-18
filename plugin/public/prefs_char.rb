@@ -1,6 +1,10 @@
 module AresMUSH
   class Character
-    attribute :prefs, :type => DataType::Hash, :default => {}
+    
+    attribute :rp_prefs
+    
+    # DEPRECATED
+    attribute :prefs
     attribute :prefs_notes
   end
 end

@@ -15,12 +15,10 @@ module AresMUSH
       case cmd.root
       when "pref"
         case cmd.switch
-        when "filter"
+        when "search"
           return FilterPrefsCmd
         when "set"
           return SetPrefsCmd
-        when "note"
-          return PrefsNoteCmd
         when nil
           return PrefsCmd
         end
@@ -32,6 +30,10 @@ module AresMUSH
     end
 
     def self.get_web_request_handler(request)
+      case request.cmd
+      when "prefs"
+        return PrefsRequestHandler
+      end
       nil
     end
 

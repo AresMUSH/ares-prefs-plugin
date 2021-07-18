@@ -11,16 +11,16 @@ module AresMUSH
       
       def handle
         ClassTargetFinder.with_a_character(self.name, client, enactor) do |model|
-          prefs = model.prefs || {}
-          template = PrefsTemplate.new(model)
-          client.emit template.render     
+          if (model.rp_prefs.blank?)
+            client.emit_failure t('prefs.none_set', :name => model.name)
+            return
+          end
+          
+          formatter = MarkdownFormatter.new
+          text = formatter.to_mush(model.rp_prefs)
+          template = BorderedDisplayTemplate.new(text, t('prefs.prefs_title', :name => model.name))
+          client.emit template.render
         end
-      end
-      
-      def format_pref(name, data)
-        
-        
-        "#{name}: #{setting} #{data['note']}"
       end
     end
   end

@@ -4,9 +4,10 @@ module AresMUSH
       Global.read_config('prefs', 'categories') || []
     end
     
-    def self.is_valid_setting?(setting)
-      [ '+', '-', '~' ].include?(setting)
+    def self.can_edit_prefs?(actor, model)
+      return false if !actor
+      return true if actor.name == model.name
+      actor && actor.has_permission?("manage_prefs")
     end
-    
   end
 end
