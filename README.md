@@ -30,17 +30,13 @@ Preferences show up on player and character profiles, and can be edited through 
 
 ## Installation
 
-In the game, run `plugin/install <github url>`.
+1. In the game, run `plugin/install <github url>`.
+2. Add the RP preferences summary to the [web portal navbar](https://aresmush.com/tutorials/config/website.html#changing-the-navbar). Under 'Directory' is a good place to start, but it can go anywhere.
 
-See additional setup instructions below.
-
-## Configuration
-
-Once installed, go to the web portal setup screen.  Edit `prefs.yml` and you can configure the following setings.
-
-## categories
-
-You can configure the list of categories that players can set a preference for.
+```
+- title: RP Preferences
+  route: prefs
+```
 
 ## Uninstalling
 
