@@ -18,7 +18,8 @@ module AresMUSH
     
     def self.build_web_profile_edit_data(char, enactor, is_profile_manager)
       {
-        rp_prefs: Website.format_input_for_html(char.rp_prefs)
+        rp_prefs: Website.format_input_for_html(char.rp_prefs),
+        show_rp_prefs_tab: true
       }
     end
   end
