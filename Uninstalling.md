@@ -2,7 +2,7 @@
 
 Ares plugins plug IN easily, but taking them out requires a bit of code fiddling.
 
-1. Run the following command with a coder character: `Prefs.uninstall_plugin(client)`
+1. Run the following command with a coder character: `ruby Prefs.uninstall_plugin(client)`
 
 2. Manually remove all plugin's files from your server (and GitHub fork, if applicable), including:
     * aresmush/plugins/prefs
