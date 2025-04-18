@@ -12,7 +12,7 @@ module AresMUSH
         return t('dispatcher.not_allowed')
       end
       
-      char.update(rp_prefs: Website.format_input_for_mush(args[:rp_prefs]))
+      char.update(rp_prefs: Website.format_input_for_mush(args['rp_prefs']))
       nil
     end
     
