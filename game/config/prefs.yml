@@ -3,3 +3,5 @@ prefs:
     shortcuts:
         prefs: pref
         pref/filter: pref/search
+    permissions:
+      manage_prefs: Manage RP preferences.
