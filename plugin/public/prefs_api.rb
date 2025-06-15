@@ -8,11 +8,10 @@ module AresMUSH
     end
     
     def self.save_web_profile_data(char, enactor, args)
-      if (!Prefs.can_edit_prefs?(enactor, char))
-        return t('dispatcher.not_allowed')
+      if (Prefs.can_edit_prefs?(enactor, char))
+        char.update(rp_prefs: Website.format_input_for_mush(args['rp_prefs']))
       end
       
-      char.update(rp_prefs: Website.format_input_for_mush(args['rp_prefs']))
       nil
     end
     

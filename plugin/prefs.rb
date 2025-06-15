@@ -37,5 +37,9 @@ module AresMUSH
       nil
     end
 
+    def self.plugin_version
+      "2.0"
+    end
+
   end
 end
